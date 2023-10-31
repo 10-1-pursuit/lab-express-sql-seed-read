@@ -11,4 +11,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to Tuner");
 });
 
+app.get("*", (req, res) => {
+  res.status(404).send("error route doesnt exist");
+});
+
 module.exports = app;
