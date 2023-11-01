@@ -1,6 +1,6 @@
 \c songs_dev;
 
-INSERT INTO songs VALUES
+INSERT INTO songs VALUES(title, artist,album, runTime, is_favorite)
 ('Life is Like a Beach Chair','Jay-z','BluePrint',"3:15" ,true),
 ('Beat it', 'Michael Jacson', 'Remember the times',"5:43",true ),
 ('Everything is Gonna Be Alright', 'Bob Marley',"JamRock", "4:15",true),
