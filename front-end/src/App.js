@@ -1,9 +1,16 @@
-function App() {
-  return (
-    <div className="">
-      <h1>Tuner App</h1>
-    </div>
-  );
-}
+const cors = require("cors");
+const express = require("express");
 
-export default App;
+// CONFIGURATION
+const app = express();
+
+// MIDDLEWARE
+app.use(cors());
+app.use(express.json());
+
+// ROUTES
+app.get("/", (req, res) => {
+  res.send("Welcome to Colors App");
+});
+
+module.exports = app;
