@@ -9,4 +9,26 @@ const getAllSongs = async () => {
   }
 };
 
-module.exports = { getAllSongs };
+const getSong = async (id) => {
+    try {
+      const oneSong = await db.one("SELECT * FROM songs WHERE id=$1", id);
+      return oneSong;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const createSong = async (song) => {
+    try {
+      const newSong = await db.one(
+        "INSERT INTO songs (artist, album, time, is_favorite) VALUES($1, $2, $3, $4) RETURNING *",
+        [song.artist, song.album, song.time, song.is_favorite]
+      );
+      return newSong;
+    } catch (error) {
+      return error;
+    }
+  };
+  
+
+module.exports = { getAllSongs, getSong, createSong };
