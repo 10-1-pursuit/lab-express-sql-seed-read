@@ -2,7 +2,7 @@
   "name": "tuner-mono-repo",
   "version": "1.0.0",
   "description": "Starter code for student lab",
-  "main": "nodemon server.js",
+  "main": "server.js",
   "scripts": {
     "db:init": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
