@@ -2,11 +2,12 @@
   "name": "tuner-mono-repo",
   "version": "1.0.0",
   "description": "Starter code for student lab",
-  "main": "server.js",
+  "main": "nodemon server.js",
   "scripts": {
     "db:init": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
