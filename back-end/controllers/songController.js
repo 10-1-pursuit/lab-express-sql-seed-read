@@ -15,6 +15,7 @@ const {
 
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
+  console.log(allSongs);
   if (allSongs[0]) {
     res.status(200).json(allSongs);
   } else {
