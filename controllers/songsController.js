@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllSongs, getSong } = require('../queries/song')
+const { getAllSongs, getSong, createSong } = require('../queries/song')
 const songs = express.Router()
 
 
@@ -22,6 +22,12 @@ songs.get('/:id', async (req,res) => {
     } else {
         res.status(404).json({error: 'Not Found' })
     }
+})
+
+songs.post('/', async (req, res) => {
+    const body = req.body
+    const song = await createSong(body)
+    res.status(200).json(song)
 })
 
 
