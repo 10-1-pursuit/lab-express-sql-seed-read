@@ -4,6 +4,7 @@ CREATE DATABASE tuner;
 
 CREATE TABLE songs (
   id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
   artist TEXT NOT NULL,
   album TEXT NOT NULL,
   time TEXT,

@@ -9,6 +9,27 @@ const getAllSongs = async () => {
   }
 };
 
+const getSortedSongs = async (order) => {
+    let query = `SELECT * FROM songs`;
+    if (order === 'asc') {
+      query += ` ORDER BY name ASC`;
+    } else if (order === 'desc') {
+      query += ` ORDER BY name DESC`;
+    }
+    const songs = await db.query(query);
+    return songs;
+  }
+  
+  const getFilteredSongs = async (isFavorite) => {
+
+    let query = `SELECT * FROM songs`;
+    if (isFavorite !== undefined) {
+      query += ` WHERE is_favorite = ${isFavorite}`;
+    }
+    const songs = await db.query(query);
+    return songs;
+  }
+
 const getSong = async (id) => {
     try {
       const oneSong = await db.one("SELECT * FROM songs WHERE id=$1", id);
@@ -21,8 +42,8 @@ const getSong = async (id) => {
   const createSong = async (song) => {
     try {
       const newSong = await db.one(
-        "INSERT INTO songs (artist, album, time, is_favorite) VALUES($1, $2, $3, $4) RETURNING *",
-        [song.artist, song.album, song.time, song.is_favorite]
+        "INSERT INTO songs (name, artist, album, time, is_favorite) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [song.name, song.artist, song.album, song.time, song.is_favorite]
       );
       return newSong;
     } catch (error) {
@@ -45,8 +66,8 @@ const getSong = async (id) => {
   const updateSong = async (id, song) => {
     try {
       const updatedSong = await db.one(
-        "UPDATE songs SET artist=$1, album=$2, time=$3, is_favorite=$4 where id=$5 RETURNING *",
-        [song.artist, song.album, song.time, song.is_favorite, id]
+        "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 where id=$6 RETURNING *",
+        [song.name, song.artist, song.album, song.time, song.is_favorite, id]
       );
       return updatedSong;
     } catch (error) {
@@ -55,4 +76,4 @@ const getSong = async (id) => {
   };
   
 
-module.exports = { getAllSongs, getSong, createSong, deleteSong, updateSong };
+module.exports = { getAllSongs, getSong, createSong, deleteSong, updateSong, getFilteredSongs, getSortedSongs };
