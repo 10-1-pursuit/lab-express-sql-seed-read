@@ -1,5 +1,5 @@
 -- db/seed.sql
-\c songs_dev;
+\c tuner;
 
 INSERT INTO songs ( name,
  artist,

@@ -1,5 +1,5 @@
-// queries/songs.js
-const db = require('../db/dbConfig')
+// queries/song.js
+const db = require('../db/dbConfiq')
 
 const getAllSongs = async () => {
     try {

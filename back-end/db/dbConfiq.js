@@ -10,7 +10,7 @@ const cn = {
     user: process.env.PG_USER
 }
 
-// Connect to colors_dev db
+// Connect to songs_dev db
 const db = pgp(cn)
 
 module.exports = db

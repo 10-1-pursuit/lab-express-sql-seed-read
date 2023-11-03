@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to my Tuner App");
 });
 
-// Colors ROUTES
+// Songs ROUTES
 const songsController = require("./controllers/songsController.js");
 app.use("/songs", songsController);
 

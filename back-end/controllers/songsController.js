@@ -1,7 +1,7 @@
 // controllers/songController.js
 const express = require("express");
 const songs = express.Router();
-const { getAllsongs } = require("../queries/song");
+const { getAllSongs } = require("../queries/song");
 
 // INDEX
 songs.get("/", async (req, res) => {
