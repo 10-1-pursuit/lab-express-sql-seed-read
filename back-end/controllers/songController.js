@@ -1,6 +1,6 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs ,getSong,createSong} = require("/Users/shakalivingstonepursuit/Desktop/lab-express-sql-seed-read/front-end/queries/song");
+const { getAllSongs ,getSong,createSong,deleteSong,updateSongs} = require("/Users/shakalivingstonepursuit/Desktop/lab-express-sql-seed-read/front-end/queries/song");
 
 
 songs.get("/", async (req, res) => {
@@ -43,4 +43,28 @@ if(newSong){
 
 })
 
+
+songs.delete("/:id", async (req,res)=>{
+    const {id}= req.params;
+    const deletedSong= await deleteSong(id)
+    if(deletedSong.id){
+
+        res.status(200).json(deletedSong)
+    }else{
+     res.status(400).json('Song was not found')   
+    }
+
+
+
+})
+
+songs.put("/:id", async(req,res)=>{
+
+
+const {id}= req.params
+const{body}=req.body
+const updatedSong= await updateSongs(id,body);
+res.status(200).json(updatedSong)
+
+})
 

@@ -48,9 +48,30 @@ try{
 
 }
 
-// name string, required
-// artist: string, required
-// album: string
-// time: string
-// is_favorite: boolean
-module.exports={getAllSongs,getSong,createSong}
+const deleteSong= async(id)=>{
+    try{
+        const deleteIndex= await db.one('DELETE FROM songs WHERE id=$1 RETURNING *',id
+        );
+        return deleteIndex
+
+
+
+    }catch(error){
+        return error
+
+
+    }
+}
+
+const updateSongs=async(id,color)=>{
+    try{
+        const updatedSong= await db.one ("UPDATE songs SET name=$1, is_favorite=$2 where id=$3 RETURNING *",
+        [color.name,color.is_favorite,id])
+            return updatedSong
+    }catch{(error)
+            return error
+    }
+}
+
+
+module.exports={getAllSongs,getSong,createSong,deleteSong,updateSongs}
