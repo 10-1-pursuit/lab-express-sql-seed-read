@@ -4,7 +4,33 @@ const { getAllSongs, getSong, createSong, deleteSong, updateSong } = require("..
 const { checkName, checkArtist, checkBoolean } = require("../validations/checkSongs.js");
 
 songs.get("/", async (req, res) => {
-    const allSongs = await getAllSongs();
+    const {order, is_favorite} = req.query;
+    let allSongs = await getAllSongs();
+    let sortOrder = "asc";
+
+    if (order === "desc") {
+        sortOrder = "desc";
+    }
+
+    if (is_favorite === "true" || is_favorite === "false") {
+        if (is_favorite === "true") {
+            allSongs = allSongs.filter(song => song.is_favorite === true);
+        } else if (is_favorite === "false") {
+            allSongs = allSongs.filter(song => song.is_favorite === false);
+        }
+    }
+
+    allSongs = allSongs.sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+
+        if (sortOrder === "asc") {
+            return nameA.localeCompare(nameB);
+        } else {
+            return nameB.localeCompare(nameA);
+        }
+    });
+
     if (allSongs[0]) {
         res.status(200).json(allSongs);
     } else {
