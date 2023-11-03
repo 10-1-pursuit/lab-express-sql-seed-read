@@ -1,15 +1,15 @@
 
 \c tunes_app;
 
-INSERT INTO songs ( name, artist, is_favorite) VALUES ('Dj NovaK', 'sCARED oF nUTHIN (promo)', true),
-('Ke$ha', 'Praying', true),
-('Meek', 'Lyrically Easy', true),
-('Dante Bowe', 'Fire', false),
-('Rihanna', 'Love on the Brain', true),
-('A Boogie Wit da Hoodie', 'Did Me Wrong', true),
-('Alicia Creti', 'Congratulations', false),
-('Prince', 'Diamonds & Pearls', true),
-('Grace', 'Peace & Love', false),
-('Sk', 'SK Banga', true);
+INSERT INTO songs ( name, artist, album, is_favorite) VALUES ( 'sCARED oF nUTHIN (promo)','Dj NovaK','Tunes', true),
+('Praying','Ke$ha', 'Tunes', true),
+('Lyrically Easy','Meek', 'Tunes', true),
+('Fire','Dante Bowe', 'Tunes', false),
+('Love on the Brain','Rihanna', 'Tunes', true),
+('Did Me Wrong','A Boogie Wit da Hoodie', 'Tunes', true),
+('Congratulations','Alicia Creti', 'Tunes', false),
+('Diamonds & Pearls','Prince', 'Tunes', true),
+('Peace & Love','Grace', 'Tunes', false),
+('SK Banga','Sk', 'Tunes', true);
 
 --psql -U postgres -f db/seed. sal.
