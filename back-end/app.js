@@ -12,7 +12,7 @@ app.use(express.json());
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Welcome to Tuner");
+    res.send("Welcome to Tuner");
 });
 
 // Songs ROUTES
@@ -21,7 +21,7 @@ app.use("/songs", songsController);
 
 // 404 PAGE
 app.get("*", (req, res) => {
-  res.status(404).send("Page not found");
+    res.status(404).send("Page not found");
 });
 
 
