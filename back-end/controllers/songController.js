@@ -1,22 +1,17 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs, getSong, createSong, updateSong, deleteSong, getSortedSongs, getFilteredSongs } = require("../queries/song");
+const { getAllSongs, getSong, createSong, updateSong, deleteSong } = require("../queries/song");
 const { checkName, checkArtist, checkBoolean, checkAlbum, checkTime } = require("../validations/checkSongs.js")
 
 // INDEX
-songs.get('/', async (req, res) => {
-    const { order } = req.query;   
-    const isFav = req.query.isFavorite;
-    let songs;
-    if (order) {
-      songs = await getSortedSongs(order);
-    } else if (isFav) {
-      songs = await getFilteredSongs(isFav); 
-    } else {
-      songs = await getAllSongs();
-    }
-    res.json(songs);
-  });
+songs.get("/", async (req, res) => {
+  const allSongs = await getAllSongs(req.query);
+  if (allSongs[0]) {
+    res.status(200).json(allSongs);
+  } else {
+    res.status(404).json({ status: "server error" });
+  }
+});
 
 songs.get("/:id", async (req, res) => {
     const { id } = req.params;

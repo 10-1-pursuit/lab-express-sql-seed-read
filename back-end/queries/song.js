@@ -1,43 +1,66 @@
 const db = require("../db/dbConfig.js");
 
-const getAllSongs = async () => {
+const getAllSongs = async (query) => {
+  const { order, is_favorite } = query;
   try {
-    const allSongs = await db.any("SELECT * FROM songs");
-    return allSongs;
+    if (order) {
+      const allSongs = await orderAllSongs(order);
+      return allSongs;
+    }
+    if (is_favorite) {
+      const allSongs = await favoriteSongs(is_favorite);
+      return allSongs;
+    } else {
+      const allSongs = await db.any("SELECT * FROM songs");
+      return allSongs;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const orderAllSongs = async (order) => {
+  let sortedSongs;
+  try {
+    if (order === "asc") {
+      sortedSongs = await db.any("SELECT * FROM songs ORDER by name ASC");
+    } else {
+     sortedSongs = await db.any(
+        "SELECT * FROM songs ORDER by name DESC"
+      );
+    }
+    return sortedSongs;
   } catch (error) {
     return error;
   }
 };
 
-const getSortedSongs = async (order) => {
-    let query = `SELECT * FROM songs`;
-    if (order === 'asc') {
-      query += ` ORDER BY name ASC`;
-    } else if (order === 'desc') {
-      query += ` ORDER BY name DESC`;
+const favoriteSongs = async (is_favorite) => {
+  let sortedSongs;
+  try {
+    if (is_favorite === 'true') {
+       sortedSongs = await db.any(
+        "SELECT * FROM songs WHERE is_favorite IS true"
+      );
+    } else {
+       sortedSongs = await db.any(
+        "SELECT * FROM songs WHERE is_favorite IS false"
+      );
     }
-    const songs = await db.query(query);
-    return songs;
+    return sortedSongs;
+  } catch (error) {
+    return error;
   }
-  
-  const getFilteredSongs = async (isFavorite) => {
-
-    let query = `SELECT * FROM songs`;
-    if (isFavorite !== undefined) {
-      query += ` WHERE is_favorite = ${isFavorite}`;
-    }
-    const songs = await db.query(query);
-    return songs;
-  }
+};
 
 const getSong = async (id) => {
-    try {
-      const oneSong = await db.one("SELECT * FROM songs WHERE id=$1", id);
-      return oneSong;
-    } catch (error) {
-      return error;
-    }
-  };
+  try {
+    const oneSong = await db.one("SELECT * FROM songs WHERE id=$1", id);
+    return oneSong;
+  } catch (error) {
+    return error;
+  }
+};
 
   const createSong = async (song) => {
     try {
@@ -76,4 +99,4 @@ const getSong = async (id) => {
   };
   
 
-module.exports = { getAllSongs, getSong, createSong, deleteSong, updateSong, getFilteredSongs, getSortedSongs };
+module.exports = { getAllSongs, getSong, createSong, deleteSong, updateSong }
