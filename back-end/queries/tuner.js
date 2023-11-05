@@ -20,15 +20,8 @@ const getTune = async (id) => {
 
 const createTune = async (song) => {
   const newSong = await db.one(
-    "INSERT INTO tuners (name, artist, album ,time, is_favorite) VALUES ($1,$2,$3,$4,$5) RETURNING *",
-    [
-      song.name,
-      song.artist,
-      song.album,
-      song.title,
-      song.time,
-      song.is_favorite,
-    ]
+    "INSERT INTO tuners (name, artist, album ,year_release, is_favorite) VALUES ($1,$2,$3,$4,$5) RETURNING *",
+    [song.name, song.artist, song.album, song.year_release, song.is_favorite]
   );
   return newSong;
 };
@@ -48,8 +41,15 @@ const deleteTune = async (id) => {
 const updateTune = async (id, song) => {
   try {
     const updatedSong = await db.one(
-      "UPDATE tuners SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE id=$6 Returning *",
-      [song.name, song.artist, song.album, song.time, song.is_favorite, id]
+      "UPDATE tuners SET name=$1, artist=$2, album=$3, year_release=$4, is_favorite=$5 WHERE id=$6 Returning *",
+      [
+        song.name,
+        song.artist,
+        song.album,
+        song.year_release,
+        song.is_favorite,
+        id,
+      ]
     );
     return updatedSong;
   } catch (error) {
