@@ -1,6 +1,6 @@
 const express = require("express")
 const songs = express.Router()
-const {getAllSongs, getSong, createSong, deleteSong, updateSong} = require("../queries/song")
+const {getAllSongs, getSong, createSong, deleteSong, updateSong, getAllSongsAsc} = require("../queries/song")
 const {checkName, checkArtist, checkBoolean} = require("../validations/checkSongs")
 
 songs.get("/", async (req, res)=>{
@@ -46,6 +46,15 @@ songs.put("/:id", checkName, checkArtist, checkBoolean, async (req, res)=>{
         res.status(200).json(updatedSong)
     } else {
         res.status(404).json({error: "Song NOT updated!"})
+    }
+})
+
+songs.get("/songs?order=asc", async (req, res)=>{
+    const allSongsAsc = await getAllSongsAsc()
+    if (allSongsAsc[0]){
+        res.status(200).json(allSongsAsc)
+    } else {
+        res.status(500).json({error: "SERVER ERROR"})
     }
 })
 
