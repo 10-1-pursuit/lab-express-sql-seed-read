@@ -36,8 +36,18 @@ songs.post(
   checkTimeInput,
   checkBoolean,
   async (req, res) => {
-    const postSong = await createSong(req.body);
-    res.status(200).json(postSong);
+    try {
+      const postSong = await createSong(req.body);
+      if (postSong instanceof Error) {
+        console.error(postSong); 
+        res.status(500).json({ error: "Internal server error" });
+      } else {
+        res.status(200).json(postSong);
+      }
+    } catch (error) {
+      console.error(error); 
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 );
 
