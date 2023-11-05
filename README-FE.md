@@ -1,4 +1,16 @@
-# Tuner Front-End
+## Tuner Front-End
+
+- [Tuner-front-end](https://seed-read-songs-front-end.netlify.app/)
+
+## Tuner Back-End
+
+- [Tuner-back-end](https://songs-api-1ej6.onrender.com/songs)
+
+## Front-End-Repo
+
+- [Tuner-front-end-repo](https://github.com/Jameel914/seed-read-front-end)
+
+---
 
 ## Getting Started
 
