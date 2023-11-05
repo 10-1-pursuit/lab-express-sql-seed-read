@@ -8,6 +8,11 @@ CREATE TABLE songs (
  name TEXT NOT NULL,
  artist TEXT NOT NULL,
  album TEXT NOT NULL,
---  time TEXT NOT NULL,
+ time TEXT NOT NULL,
  is_favorite BOOLEAN
 );
+
+
+
+-- DO SOMETHING | at column | FROM  |  table name | Specifications
+-- SELECT       | album     | FROM  |     songs   | WHERE name ILIKE 'love'

@@ -6,7 +6,7 @@ const checkSongName = (req, res, next) => {
   }
 };
 
-checkArtistName = (req, res, next) => {
+const checkArtistName = (req, res, next) => {
   const artist = req.body.artist;
   if (typeof artist === "string") {
     next();
@@ -15,14 +15,40 @@ checkArtistName = (req, res, next) => {
   }
 };
 
+const checkAlbumName = (req, res, next) => {
+  const album = req.body.album;
+  if (typeof album === "string") {
+    next();
+  } else {
+    res.status(400).json({ error: "Album Name must be type string" });
+  }
+};
+
+const checkTimeInput = (req, res, next) => {
+  const time = req.body.time;
+  const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
+  if (timeRegex.test(time)) {
+    next();
+  } else {
+    res
+      .status(400)
+      .json({ error: "Invalid time format. Please use HH:MM format." });
+  }
+};
+
 const checkBoolean = (req, res, next) => {
-    const fav = req.body.is_favorite
-    if (typeof fav === 'boolean') {
-        next()
-    } else {
-        res.status(400).json({error: 'is_favorite must be type boolean'})
-    }
-}
+  const fav = req.body.is_favorite;
+  if (typeof fav === "boolean") {
+    next();
+  } else {
+    res.status(400).json({ error: "is_favorite must be type boolean" });
+  }
+};
 
-
-module.exports = {checkSongName, checkArtistName, checkBoolean}
+module.exports = {
+  checkSongName,
+  checkArtistName,
+  checkBoolean,
+  checkAlbumName,
+  checkTimeInput,
+};
