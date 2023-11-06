@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/joinpursuit/tuner-full-stack-app#readme",
   "dependencies": {
-    "jest": "^27.4.7",
-    "supertest": "^6.2.0"
+    "jest": "^27.4.7"
+  },
+  "devDependencies": {
+    "supertest": "^6.3.3"
   }
 }
