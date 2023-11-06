@@ -4,6 +4,7 @@ import NavBar from './components/NavBar.jsx'
 import Home from './pages/Home.jsx'
 import Index from './pages/Index.jsx'
 import New from './pages/New.jsx'
+import Show from './pages/Show.jsx'
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path='/' element={<Home />}/>
             <Route path='/songs' element={<Index />}/>
             <Route path='/songs/new' element={<New />}/>
+            <Route path='/songs/:id' element={<Show />}/>
           </Routes>
         </main>
       </Router>
