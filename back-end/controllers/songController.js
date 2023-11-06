@@ -1,6 +1,6 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs ,getSong,createSong,deleteSong,updateSongs} = require("/Users/shakalivingstonepursuit/Desktop/lab-express-sql-seed-read/front-end/queries/song");
+const { getAllSongs ,getSong,createSong,deleteSong,updateSongs} = require("../queries/song");
 
 
 songs.get("/", async (req, res) => {
@@ -12,7 +12,7 @@ songs.get("/", async (req, res) => {
   }
 });
 
-module.exports = songs;
+
 
 songs.get("/:id", async (req,res)=>{
 const id=req.params.id
@@ -68,3 +68,4 @@ res.status(200).json(updatedSong)
 
 })
 
+module.exports = songs;
