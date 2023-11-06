@@ -6,6 +6,7 @@ import Index from './pages/Index.jsx'
 import New from './pages/New.jsx'
 import Show from './pages/Show.jsx'
 import Edit from './pages/Edit.jsx'
+import FourOFour from './pages/FourOFour.jsx'
 import './App.css'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path='/songs/new' element={<New />}/>
             <Route path='/songs/:id' element={<Show />}/>
             <Route path='/songs/:id/edit' element={<Edit />}/>
+            <Route path='*' element={<FourOFour />}/>
           </Routes>
         </main>
       </Router>
