@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // PAGES
 import Home from './Pages/Home';
 import Index from "./Pages/Index";
+import Show from "./Pages/Show";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 <Routes>
   <Route path='/' element={<Home />} />
   <Route path="/songs" element={<Index />} />
+  <Route path='/songs/:index' element={<Show />} />
 </Routes>
     </div>
     </Router>
