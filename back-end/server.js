@@ -1,5 +1,5 @@
 // DEPENDENCIES
-const app = require("../front-end/src/App");
+const app = require("./app");
 
 // CONFIGURATION
 require("dotenv").config();
