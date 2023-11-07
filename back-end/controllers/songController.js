@@ -41,4 +41,19 @@ songs.post("/", async (req, res) => {
 })
 
 
+
+//   PUT Methode Update song
+songs.put("/:id", async (req, res) => {
+    const { id } = req.params
+    const body = req.body
+    const updatedSong = await updateSong(id, body)
+
+    if (!updatedSong) {
+        res.status(404).json({error: "Song did not updae"})
+    } else {
+        res.status(202).json(updatedSong)
+    }
+})
+
+
 module.exports = songs;
