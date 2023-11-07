@@ -1,6 +1,11 @@
 const express = require("express");
 
-const { getAllSongs, getSong, createSong } = require("../queries/song");
+const {
+  getAllSongs,
+  getSong,
+  createSong,
+  updateSong,
+} = require("../queries/song");
 
 const songs = express.Router();
 
