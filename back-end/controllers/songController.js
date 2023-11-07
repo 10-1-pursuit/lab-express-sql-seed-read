@@ -5,6 +5,7 @@ const {
   getSong,
   createSong,
   updateSong,
+  deleteSong
 } = require("../queries/song");
 
 const songs = express.Router();
@@ -36,8 +37,8 @@ songs.get("/:id", async (req, res) => {
 
 songs.post("/", async (req, res) => {
     const body = req.body
-    const newTask = await createSong(body)
-    res.status(200).json(newTask);
+    const newSong = await createSong(body)
+    res.status(200).json(newSong);
 })
 
 
@@ -49,11 +50,13 @@ songs.put("/:id", async (req, res) => {
     const updatedSong = await updateSong(id, body)
 
     if (!updatedSong) {
-        res.status(404).json({error: "Song did not updae"})
+        res.status(404).json({error: "Song did not update"})
     } else {
-        res.status(202).json(updatedSong)
+        res.status(202).json(updateSong)
     }
 })
+
+//
 
 
 module.exports = songs;

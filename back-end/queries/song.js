@@ -26,10 +26,9 @@ const getSong = async (id) => {
 async function createSong(song) {
     try {
         const newSong = await db.one(
-            "INSERT INTO songs (name, Fame, artist, album, time, is_favorite) VALUES ($1, $2, $3, $4, $5, $6) RETURNING * ",
+            "INSERT INTO songs (name, artist, album, time, is_favorite) VALUES ($1, $2, $3, $4, $5) RETURNING * ",
             [
             song.name,
-            song.fame,
             song.artist,
             song.album,
             song.time,
@@ -48,10 +47,9 @@ async function createSong(song) {
 async function updateSong(id, song) {
   try {
     const updatedSong = await db.one(
-      "UPDATE songs SET name=$1, Fame=$2, artist=$3, album=$4, time=$5, is_favorite=$6 WHERE id=$7 RETURNING * ",
+      "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE id=$6 RETURNING * ",
       [
         song.name,
-        song.fame,
         song.artist,
         song.album,
         song.time,
@@ -65,7 +63,21 @@ async function updateSong(id, song) {
   }
 }
 
+async function deleteSong(id) {
+    
+    try {
+        const deletedSong = await db.one(
+          "DELETE FROM songs WHERE id=$1 RETURNING *",
+          id
+        );
+         return deletedSong;
+    }
+   
+    catch (e) {
+        console.log(e)
+    }
+}
 
 
 
-module.exports = { getAllSongs, getSong, createSong, updateSong };
+module.exports = { getAllSongs, getSong, createSong, updateSong, deleteSong };
