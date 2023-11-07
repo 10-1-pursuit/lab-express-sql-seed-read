@@ -22,29 +22,30 @@ const getSong = async (id) => {
 };
 
 
-// CREATE song  using POST Methode
 
-songs.post("/", async (req, res) => {
-    const body = req.body
-    const newTask = await createSong(body)
-    res.status(200).json(newTask);
-})
-
-//   PUT Methode Update song
-songs.put("/:id", async (req, res) => {
-    const { id } = req.params
-    const body = req.body
-    const updatedSong = await updateSong(id, body)
-
-    if (!updatedSong) {
-        res.status(404).json({error: "Song did not updae"})
-    } else {
-        res.status(202).json(updatedSong)
+async function createSong(song) {
+    try {
+        const newSong = await db.one(
+            "INSERT INTO songs (name, Fame, artist, album, time, is_favorite) VALUES ($1, $2, $3, $4, $5, $6) RETURNING * ",
+            [
+            song.name,
+            song.fame,
+            song.artist,
+            song.album,
+            song.time,
+            song.is_favorite,
+            ]
+        
+        )
+        return newSong
     }
-})
+    catch (e) {
+        console.log(e)
+    }
+}
 
 
 
 
 
-module.exports = { getAllSongs, getSong };
+module.exports = { getAllSongs, getSong, createSong };

@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { getAllSongs, getSong } = require("../queries/song");
+const { getAllSongs, getSong, createSong } = require("../queries/song");
 
 const songs = express.Router();
 
@@ -27,7 +27,13 @@ songs.get("/:id", async (req, res) => {
 });
 
 
+// CREATE song  using POST Methode
 
+songs.post("/", async (req, res) => {
+    const body = req.body
+    const newTask = await createSong(body)
+    res.status(200).json(newTask);
+})
 
 
 module.exports = songs;
