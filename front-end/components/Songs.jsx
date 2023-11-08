@@ -1,46 +1,47 @@
-import { useState, useEffect } from "react";
-import Song from "./Song";
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
-const API = import.meta.env.VITE_API_URL;
 
 function Songs() {
-  const [songs, setSongs] = useState([]);
+const [songsArray, setsongsArray] = useState([]);
+ const API = import.meta.env.REACT_APP_API_URL;
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      fetch(`${API}/songs`)
-      .then(res => res.json())
-      .then(res => {
-        setSongs(res)
-      })
-    } catch (error) {
-      return error
+
+
+  useEffect(() => {
+    async function fetchSongsData() {
+
+      try {
+        fetch(`${API}/songs`)
+        .then(res => res.json())
+        .then(res => setsongsArray(res));
+      } catch (e) {
+        console.log(e);
+      }
     }
-  }
-  fetchData()
-  }, [])
+
+    fetchSongsData();
+
+  }, []);
 
   return (
-    <div className="Songs">
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <th>Favorite</th>
-              <th>See this song</th>
-              <th>Swatch</th>
-            </tr>
-          </thead>
-          <tbody>
-            {songs.map((song, index) => {
-              return <Songs key={song.id} song={song} />;
-            })}
-          </tbody>
-        </table>
-      </section>
+    <div>
+      <h1>Song List</h1>
+      <ul>
+        {songsArray.map((song) => (
+          <li key={song.id}>
+            <Link to={`/songs/${song.id}`}>
+              {song.name} - {song.artist} ({song.time})
+            </Link>
+            <span>{song.is_favorite ? ' - Favorite' : ''}</span>
+          </li>
+        ))}
+      </ul>
+      <Link to="/songs/new">
+        <button>Add New Song</button>
+      </Link>
     </div>
   );
-}
+};
 
 export default Songs;
