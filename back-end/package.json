@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "db:init": "psql -U postgres -f db/schema.sql",
+    "db:init": "psql -U postgres -f db/schema.sql; psql -U postgres -f db/seed.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
     "test": "jest --runInBand"
   },

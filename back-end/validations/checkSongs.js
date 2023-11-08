@@ -33,7 +33,7 @@ const checkArtist = (req, res, next) => {
         return next()
     } else {
         res.status(400).json({ error: 'Artist is required'})
-    }
+    }}
     const checkAlbum = (req, res, next) => {
         if(req.body.album){
             // next() comes from the parameters
@@ -43,6 +43,6 @@ const checkArtist = (req, res, next) => {
             res.status(400).json({ error: 'Album is required'})
         }
     }
-    
 
-    module.exports = { checkName, checkBoolean, checkArtist, checkTime ,checkAlbum }
+
+    module.exports = { checkName, checkBoolean, checkArtist, checkTime ,checkAlbum}
