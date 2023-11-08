@@ -7,6 +7,7 @@ import SingleSong from "./components/SingleSong";
 import { useParams } from "react-router-dom";
 import CreateASong from "./components/CreateSong";
 import Header from "./Header";
+import EditSong from "./components/EditSong";
 function App() {
   return (
 <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <Route path="/songs" element={<GetAllSongs/>}/>
         <Route path="/songs/:id" element={<SingleSong/>}/>
         <Route path="/songs/create" element={<CreateASong/>}/>
+        <Route path="/songs/:id/edit" element={<EditSong/>}/>
       </Routes>
       </main>
       </Router>
