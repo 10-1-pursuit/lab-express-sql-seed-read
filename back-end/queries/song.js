@@ -19,7 +19,7 @@ try{
 
 const getSong= async (id)=>{
 try{
-    const oneSong= await db.one("SELECT * FROM songs WHERE id=$1",id)
+    const oneSong= await db.one("SELECT * FROM songs WHERE id=$1",[id])
 return oneSong
 
 }catch(error){
@@ -50,7 +50,7 @@ try{
 
 const deleteSong= async(id)=>{
     try{
-        const deleteIndex= await db.one('DELETE FROM songs WHERE id=$1 RETURNING *',id
+        const deleteIndex= await db.one('DELETE FROM songs WHERE id=$1 RETURNING *',[id]
         );
         return deleteIndex
 

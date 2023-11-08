@@ -5,7 +5,7 @@ const { getAllSongs ,getSong,createSong,deleteSong,updateSongs} = require("../qu
 
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
-  if (allSongs[0]) {
+  if (allSongs) {
     res.status(200).json(allSongs);
   } else {
     res.status(500).json({ error: "server error" });
@@ -15,7 +15,7 @@ songs.get("/", async (req, res) => {
 
 
 songs.get("/:id", async (req,res)=>{
-const id=req.params.id
+const {id}=req.params
 const oneSong= await getSong(id);
 if(oneSong){
 
