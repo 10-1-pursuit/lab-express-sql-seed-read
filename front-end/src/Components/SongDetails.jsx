@@ -9,6 +9,26 @@ function SongDetails() {
   let navigate = useNavigate();
   let { index } = useParams();
 
+  const toggleFavorite = async (id, isFavorite) => {
+    try {
+      const response = await fetch(`${API}/songs/${id}/favorite`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ is_favorite: !isFavorite }),
+      });
+  
+      if (!response.ok) {
+        console.error("Error toggling favorite status");
+      } else {
+        setSong({ ...song, is_favorite: !song.is_favorite });
+      }
+    } catch (err) {
+      console.error("Error toggling favorite status:", err);
+    }
+  };
+
 useEffect(() => {
   const fetchSong = async () => {
     try {
@@ -61,7 +81,15 @@ useEffect(() => {
                 <p>Arist: {song.artist}</p>
                 <p>Album: {song.album}</p>
                 <p>Runtime: {song.time}</p>
-                <p>Favorite: {song.is_favorite}</p>
+                <p>
+  Favorite:{" "}
+  <span
+    onClick={() => toggleFavorite(song.id, song.is_favorite)}
+    style={{ cursor: "pointer" }}
+  >
+    {song.is_favorite ? "⭐" : "☆"}
+  </span>
+</p>
                 <div>
                   <button
                     className="btn btn-warning me-2"

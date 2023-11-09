@@ -6,11 +6,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Home from './Pages/Home';
 import Index from "./Pages/Index";
 import Show from "./Pages/Show";
+import Edit from "./Pages/Edit";
+
+// COMPONENTS
+import '../src/Components/Background.css';
 
 function App() {
   return (
 <Router>
     <div className="app">
+    <div className="background">
     <Navbar className="d-flex justify-content-between align-items-center" bg="warning">
   <Nav>
     <Nav.Link href="/songs">Songs</Nav.Link>
@@ -24,7 +29,9 @@ function App() {
   <Route path='/' element={<Home />} />
   <Route path="/songs" element={<Index />} />
   <Route path='/songs/:index' element={<Show />} />
+  <Route path="/songs/:index/edit" element={<Edit />} />
 </Routes>
+</div>
     </div>
     </Router>
   );

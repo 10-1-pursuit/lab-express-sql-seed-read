@@ -1,22 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-function Song({ song }) {
-  const { name, artist, time, is_favorite } = song;
+function Song({ song, onToggleFavorite }) {
+  const { id, name, artist, time, is_favorite } = song;
 
-  console.log(name, artist, time, is_favorite)
-  
   return (
     <tr>
-      <td>{is_favorite ? '⭐️' : ''}</td>
       <td>
-        <Link to={`/songs/${song.id}`}>
-          {name}
-        </Link>
+        <span
+          role="img"
+          aria-label="Favorite"
+          onClick={() => onToggleFavorite(id, is_favorite)}
+          style={{ cursor: "pointer" }}
+        >
+          {is_favorite ? "⭐" : "☆"}
+        </span>
       </td>
-      <td>{artist}</td> 
+      <td>
+        <Link to={`/songs/${id}`}>{name}</Link>
+      </td>
+      <td>{artist}</td>
       <td>{time}</td>
     </tr>
-  )
+  );
 }
 
-export default Song
+export default Song;
