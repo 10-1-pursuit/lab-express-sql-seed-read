@@ -58,5 +58,6 @@ songs.put("/:id", checkName, checkArtist, checkBoolean, async (req, res) => {
 })
 
 
-
+// exports the file so it makes it visible to other files so we can
+// import them
 module.exports = songs;

@@ -2,6 +2,8 @@ const db = require("../db/dbConfig.js");
 
 
 const getAllSongs = async () => {
+  // async function it is not going to stop when waiting for  asychrochous
+  // calls, dont want the whole app to stop when taking that call-rest of app can keep running
     try {
         const allSongs = await db.any("SELECT * FROM songs");
         return allSongs;
@@ -10,10 +12,14 @@ const getAllSongs = async () => {
     }
 };
 
+// will try whats in the try block, and will catch all errors before the app breaks
+// if an error happens we can display it and the rest of the app can keep running w/o
+// crashing it
+
 const getOneSong = async (id) => {
     try {
        const oneSong = await db.one("SELECT * FROM songs WHERE id=$1", id)
-       return oneSong;
+       return oneSong;  //   db connects to our database and db tells it what to do
     } catch(error){
        return error;
     }
