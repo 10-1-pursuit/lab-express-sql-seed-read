@@ -1,12 +1,11 @@
 import Songs from '../Components/Songs'
 
 function Index() {
-    const h2Style = {
-        textAlign: 'center',
-    };
     return (
-        <div className="Index" >
-            <h2 style={h2Style}>Index</h2>
+        <div className="index">
+        <h1 className="text-center" style={{ background: "violet", color: "black", padding: "10px" }}>
+          Songs
+        </h1>
             <Songs />
         </div>
     )

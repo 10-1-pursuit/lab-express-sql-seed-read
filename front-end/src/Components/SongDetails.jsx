@@ -66,12 +66,9 @@ useEffect(() => {
 
   return (
     <>
-      <h1
-        className="text-center"
-        style={{ background: "#333", color: "white", padding: "10px" }}
-      >
-        Full Details
-      </h1>
+        <h1 className="text-center" style={{ background: "violet", color: "black", padding: "10px" }}>
+          Songs
+        </h1>
       <div className="d-flex justify-content-center align-items-center h-100">
         <Card className="border-5">
           <Card.Body className="text-center p-3">
