@@ -16,24 +16,14 @@ const checkArtist = (req, res, next) => {
     }
   };
 
-  const checkBoolean = (req, res, next) => {
-    const fav = req.body.is_favorite
-    console.log('Validating fav:', req.body.is_favorite);
-    if(typeof fav === 'boolean'){
-     return next()
-    } else {
-      res.status(400).json({ error: "is_favorite must be type boolean"})
-    }
-  };
-
   const checkAlbum = (req, res, next) => {
     if (req.body.album) {
       console.log('Validating album:', req.body.album);
         return next();
     } else {
-        res.status(400).json({ error: "Album is required" })
+        res.status(400).json({ error: "Album is required" });
     }
-  }
+  };
 
   const checkTime = (req, res, next) => {
     if (req.body.time) {
@@ -44,4 +34,4 @@ const checkArtist = (req, res, next) => {
     }
   }
 
-  module.exports = { checkName, checkArtist, checkBoolean, checkAlbum, checkTime };
+  module.exports = { checkName, checkArtist, checkAlbum, checkTime };
