@@ -1,8 +1,10 @@
+import SongEditForm from "../Components/SongEditForm"
+
 function Edit (){
     return (
         <div>
             <h1>
-                Testing
+                <SongEditForm/>
             </h1>
         </div>
     )

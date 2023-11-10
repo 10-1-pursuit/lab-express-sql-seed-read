@@ -1,8 +1,10 @@
+import SongDetail from "../Components/SongDetails"
+
 function Show (){
     return (
         <div>
             <h1>
-                Testing
+                <SongDetail/>
             </h1>
         </div>
     )

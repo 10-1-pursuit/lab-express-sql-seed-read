@@ -50,14 +50,14 @@ const updateSong = async (id, song)=>{
     }
 }
 
-const getAllSongsAsc = async ()=>{
-    try {
-        const allSongsAsc = await db.any("SELECT * FROM songs ORDER BY name ASC")
-        return allSongsAsc
-    } catch (error) {
-        return error
-    }
-}
+// const getAllSongsAsc = async ()=>{
+//     try {
+//         const allSongsAsc = await db.any("SELECT * FROM songs ORDER BY name ASC")
+//         return allSongsAsc
+//     } catch (error) {
+//         return error
+//     }
+// }
 
 
 module.exports = {
@@ -65,5 +65,4 @@ module.exports = {
     getSong,
     createSong,
     deleteSong,
-    updateSong,
-    getAllSongsAsc}
+    updateSong}

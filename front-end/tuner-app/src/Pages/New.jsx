@@ -1,8 +1,10 @@
+import SongNewForm from "../Components/SongNewForm"
+
 function New (){
     return (
         <div>
             <h1>
-                Testing
+                <SongNewForm/>
             </h1>
         </div>
     )
