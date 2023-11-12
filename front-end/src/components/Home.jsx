@@ -3,7 +3,10 @@ const Home = () => {
     <div className="home">
       <h1>Tuner App</h1>
       <div>
-        <p>
+        <p
+          style={{ borderBlock:'.5em solid', writingMode:'vertical-rl', padding:'170px', margin: '200px', color: "purple", fontStyle:'oblique', fontSize: '20px', fontWeight:'bold'
+          }}
+        >
           Welcome to Atlanta where the players play
           <br />
           And we ride on them things like every day

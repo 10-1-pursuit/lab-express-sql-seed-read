@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 const Songs = () => {
   const [songs, setSongs] = useState([]);
+  const [sort, setSort] = useState("asc");
 
   useEffect(() => {
     fetch(`${API}/songs`)
@@ -18,21 +19,37 @@ const Songs = () => {
       .catch((err) => console.log("Error:", err));
   }, []);
 
+  function handleSort(order) {
+    setSort(order);
+    const sortedSongs = [...songs].sort((a, b) => {
+      return order === "asc"
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name);
+    });
+    setSongs(sortedSongs);
+  }
+
   return (
-    <div className="container">
-      {songs.map((song) => (
-        <div className="all-songs container" key={song.id}>
-          <section>
-            {song.name} by
-            {song.artist} <Link to={song.album}> {song.album}</Link>
-          </section>
-          <h4> {song.time}</h4>
-          <span style={{ color: song.is_favorite ? "red" : "black" }}>
-            {song.is_favorite ? "Favorite" : ""}
-          </span> 
-        </div>
-      ))}
-    </div>
+    <>
+      <div>
+        <label> Sort Order</label>
+        <button onClick={() => handleSort("asc")}> Ascending</button>
+        <button onClick={() => handleSort("desc")}>Descending</button>
+      </div>
+      <div className="container">
+        {songs.map((song, id) => (
+          <div className="all-songs container" key={song.id}>
+        
+             Song: <Link to={`/songs/${song.id}`}> {song.name}</Link>{" "}
+              
+            {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+            <span style={{ color: song.is_favorite ? "red" : "black" }}>
+              {song.is_favorite ? "Favorite" : ""}
+            </span>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 
