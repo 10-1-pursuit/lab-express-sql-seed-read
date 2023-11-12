@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import '../styles/Songs.css'
+import "../styles/Songs.css";
+import { Link } from "react-router-dom";
 
-
-const API = process.env.REACT_APP_API_URL
+const API = process.env.REACT_APP_API_URL;
 const Songs = () => {
-    
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
@@ -18,16 +17,19 @@ const Songs = () => {
       .then((r) => setSongs(r))
       .catch((err) => console.log("Error:", err));
   }, []);
-songs.isFavorite = songs.is_favorite
 
   return (
-    <div className="container" >
-      <h2>songs container</h2>
-      {songs.map((song, id) => (
+    <div className="container">
+      {songs.map((song) => (
         <div className="all-songs container" key={song.id}>
-          <h3>
-            {song.name} by {song.artist} {song.album} {song.time} {song.isFavorite}
-          </h3>
+          <section>
+            {song.name} by
+            {song.artist} <Link to={song.album}> {song.album}</Link>
+          </section>
+          <h4> {song.time}</h4>
+          <span style={{ color: song.is_favorite ? "red" : "black" }}>
+            {song.is_favorite ? "Favorite" : ""}
+          </span> 
         </div>
       ))}
     </div>

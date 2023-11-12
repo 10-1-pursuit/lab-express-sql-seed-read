@@ -1,7 +1,7 @@
 import {BrowserRouter as  Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
-import Songs from "./components/Songs";
+import Index from "./pages/Index";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/songs" element={<Songs />} />
+            <Route path="/songs" element={<Index />} />
         
           </Routes>
         </Router>
