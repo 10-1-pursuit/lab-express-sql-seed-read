@@ -4,7 +4,6 @@ const getAllArtists = async () =>{
 try {
     const allArtists = await db.any("SELECT * FROM artists");
     return allArtists;
-    
 } catch (error) {
     return error;
 }

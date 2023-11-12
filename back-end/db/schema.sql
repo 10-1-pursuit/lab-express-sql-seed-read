@@ -7,7 +7,8 @@ CREATE TABLE artists(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     category TEXT,
-     hometown TEXT);
+     hometown TEXT
+     );
 
 
 DROP TABLE IF EXISTS tuners;
@@ -19,5 +20,5 @@ CREATE TABLE tuners(
       album TEXT,
        year_release TEXT,
        is_favorite BOOLEAN, 
-       artist_id INTEGER REFERENCES artist (id)
+       artist_id INTEGER REFERENCES artists (id)
        ON DELETE CASCADE);
