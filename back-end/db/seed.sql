@@ -6,7 +6,7 @@ INSERT INTO playlists (name, description) VALUES
 ('Chill Playlist', 'Songs for your lazy afternoons');
 
 INSERT INTO songs (name, artist, album, time, is_favorite, playlist_id) VALUES
-('American Idiot', 'Green Day', 'American Idiot', 174, false, 2),
+('American Idiot', 'Green Day', 'American Idiot', 254, false, 2),
 ('Basket Case', 'Green Day', 'Dookie', 183, true, 2),
 ('Numb', 'Linkin Park', 'Meteora', 188, true, 1),
 ('In the End', 'Linkin Park', 'Hybrid Theory', 216, true, 1),

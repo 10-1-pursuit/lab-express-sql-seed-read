@@ -1,8 +1,12 @@
 const db = require("../db/dbConfig.js");
 
-const getAllPlaylists = async () => {
+const getAllPlaylists = async (song_id) => {
   try {
-    const allPlaylists = await db.any("SELECT * FROM playlists");
+    // Select all rows from playlists table where the id of a playlist is found in the songs table where id's match.
+    const allPlaylists = await db.any(
+      "SELECT * FROM playlists WHERE id IN (SELECT playlist_id FROM songs WHERE id = $1)",
+      song_id
+    );
     return allPlaylists;
   } catch (error) {
     throw error;
@@ -18,52 +22,46 @@ const getPlaylist = async (id) => {
   }
 };
 
-const newPlaylist = async (playlist) => {
-    try {
-      const newPlaylist = await db.one("INSERT INTO playlists (name, description, song_id) VALUES($1, $2, $3) RETURNING *",
-      [
-        playlist.name,
-        playlist.description,
-        playlist.song_id
-      ]);
-      return newPlaylist;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const deletePlaylist = async (id) => {
-    try {
-        const deletedPlaylist = await db.one(
-            "DELETE FROM reviews WHERE id = $1 RETURNING *",
-            id
-        );
-        return deletedPlaylist;
-    } catch (error) {
-        return error;
-    }
+const createPlaylist = async (playlist) => {
+  try {
+    const newPlaylist = await db.one(
+      "INSERT INTO playlists (name, description) VALUES($1, $2) RETURNING *",
+      [playlist.name, playlist.description]
+    );
+    return newPlaylist;
+  } catch (error) {
+    throw error;
   }
+};
 
-  const updatePlaylist = async (playlist) => {
-    try {
-      const updatedSongPlaylist = await db.one(
-        "UPDATE playlists SET playlists (name, description, song_id) VALUES($1, $2, $3) WHERE id=$4 RETURNING *",
-      [
-        playlist.name,
-        playlist.description,
-        playlist.song_id,
-        playlist.id
-      ]);
-      return updatePlaylistPlaylist;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  module.exports = {
-    getAllPlaylists,
-    getPlaylist,
-    newPlaylist,
-    deletePlaylist,
-    updatePlaylist
+const deletePlaylist = async (id) => {
+  try {
+    const deletedPlaylist = await db.one(
+      "DELETE FROM playlists WHERE id = $1 RETURNING *",
+      id
+    );
+    return deletedPlaylist;
+  } catch (error) {
+    return error;
   }
+};
+
+const updatePlaylist = async (playlist) => {
+  try {
+    const updatedSongPlaylist = await db.one(
+      "UPDATE playlists SET name = $1, description = $2 WHERE id = $3 RETURNING *",
+      [playlist.name, playlist.description, playlist.id]
+    );
+    return updatedSongPlaylist;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = {
+  getAllPlaylists,
+  getPlaylist,
+  createPlaylist,
+  deletePlaylist,
+  updatePlaylist,
+};
