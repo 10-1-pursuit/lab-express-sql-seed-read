@@ -8,7 +8,10 @@ const checkSongName = (req, res, next) => {
 
 const checkArtistName = (req, res, next) => {
   const artist = req.body.artist;
-  if (typeof artist === "string") {
+  if (!artist) {
+    res.status(404).json({ error: "Artist is Required" });
+  }
+  else if (typeof artist === 'string') {
     next();
   } else {
     res.status(400).json({ error: "Artist must be type string" });
@@ -17,6 +20,7 @@ const checkArtistName = (req, res, next) => {
 
 const checkAlbumName = (req, res, next) => {
   const album = req.body.album;
+  
   if (typeof album === "string") {
     next();
   } else {
@@ -45,10 +49,24 @@ const checkBoolean = (req, res, next) => {
   }
 };
 
+
 module.exports = {
   checkSongName,
   checkArtistName,
-  checkBoolean,
   checkAlbumName,
   checkTimeInput,
+  checkBoolean,
+
 };
+
+
+
+// if (!req.body.name) {
+//   console.error("name", postSong);
+//   res.status(500).json({ error: "Internal server error" });
+// }
+// if (!req.body.artist) {
+//   console.error("artist", postSong);
+
+//   res.status(500).json({ error: "Internal server error" });
+// }

@@ -11,7 +11,11 @@ const getAllSongs = async () => {
 
 const getOneSong = async (id) => {
   try {
+    if (!id) {
+      res.staus(404).json({ error: "Invalid ID!" });
+    }
     const oneSong = await db.one(" SELECT * FROM songs WHERE id=$1", id);
+ 
     return oneSong;
   } catch (error) {
     return error;
@@ -30,4 +34,22 @@ const createSong = async (song) => {
   }
 };
 
-module.exports = { getAllSongs, getOneSong, createSong };
+const updateSong = async (id) => {
+  try {const updatedSong = await db.one ("UPDATE colors SET name=$1, artist=$2, is_favorite=$3  RETURNING *", [song.name, song.artist, song.is_favorite, id])
+  return updatedSong
+  } catch (err) {
+    return err
+  }
+}
+
+const deleteSong = async (id) => {
+
+  try {
+
+  }
+  catch (err) {
+    return err
+  }
+}
+
+module.exports = { getAllSongs, getOneSong, createSong, updateSong };

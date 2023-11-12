@@ -38,17 +38,24 @@ songs.post(
   async (req, res) => {
     try {
       const postSong = await createSong(req.body);
-      if (postSong instanceof Error) {
-        console.error(postSong); 
-        res.status(500).json({ error: "Internal server error" });
-      } else {
-        res.status(200).json(postSong);
-      }
+      res.status(200).json(postSong);
     } catch (error) {
-      console.error(error); 
-      res.status(500).json({ error: "Internal server error" });
+      console.error(error);
+      res.status(500).json({ error: " error" });
     }
   }
 );
 
+songs.put ('/:id', checkSongName, checkAlbumName, checkBoolean, (req, res) => {
+  const id = req.params.id;
+  const body = req.body
+  console.log(id)
+  console.log(body)
+
+})
+
+songs.delete ('/:id', (req, res) => {
+  const id = req.params.id;
+
+})
 module.exports = songs;
