@@ -35,12 +35,12 @@ res.status(200).json({...artist, allTunes});
 
 //show
 songs.get("/:id", async (req, res) => {
-  const { id, artist_id } = req.params;
+  const { artist_id, id } = req.params;
   const tune =  await getTune(id);
   const artist =  await getArtist(artist_id)
 
 if(tune){
-  res.json({...artist,tune})
+  res.json({...artist, tune})
 }else{
   res.status(404).json({error: "not found"})
 }
@@ -55,7 +55,7 @@ songs.post("/", checkName, checkArtist, checkBoolean, async (req, res) => {
 
 //update
 songs.put("/:id", checkName, checkArtist, checkBoolean, async (req, res) => {
-  const { id, artist_id } = req.params;
+  const {  artist_id,id } = req.params;
   const body = req.body;
   const updatedSong = await updateTune({artist_id,id, ...body});
   if (updatedSong.id) {

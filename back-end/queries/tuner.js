@@ -2,8 +2,9 @@ const db = require("../db/dbConfig");
 
 const getAllTunes = async (artist_id) => {
   try {
-    const allTunes = await db.any("SELECT * FROM tuners WHERE artist_id=$1",
-    artist_id
+    const allTunes = await db.any(
+      "SELECT * FROM tuners WHERE artist_id=$1",
+      artist_id
     );
     return allTunes;
   } catch (error) {
@@ -23,7 +24,14 @@ const getTune = async (id) => {
 const createTune = async (song) => {
   const newSong = await db.one(
     "INSERT INTO tuners (name, artist, album ,year_release, is_favorite, artist_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *",
-    [song.name, song.artist, song.album, song.year_release, song.is_favorite, song.artist_id]
+    [
+      song.name,
+      song.artist,
+      song.album,
+      song.year_release,
+      song.is_favorite,
+      song.artist_id,
+    ]
   );
   return newSong;
 };
@@ -40,7 +48,7 @@ const deleteTune = async (id) => {
   }
 };
 
-const updateTune = async (id, song) => {
+const updateTune = async (song) => {
   try {
     const updatedSong = await db.one(
       "UPDATE tuners SET name=$1, artist=$2, album=$3, year_release=$4, is_favorite=$5, artist_id=$6 WHERE id=$7 Returning *",
@@ -51,7 +59,7 @@ const updateTune = async (id, song) => {
         song.year_release,
         song.is_favorite,
         song.artist_id,
-        id,
+        song.id,
       ]
     );
     return updatedSong;
