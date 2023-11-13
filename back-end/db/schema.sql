@@ -15,5 +15,6 @@ CREATE TABLE songs (
   album TEXT NOT NULL,
   time INT,
   is_favorite BOOLEAN,
-  playlist_id INTEGER REFERENCES playlists(id) ON DELETE CASCADE
+  playlist_id INTEGER REFERENCES playlists(id)
+ON DELETE CASCADE
 );

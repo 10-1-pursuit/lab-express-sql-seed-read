@@ -6,13 +6,14 @@ const {
   createSong,
   updateSong,
   deleteSong,
+  updateFavoriteStatus
 } = require("../queries/song");
 const {
   checkName,
   checkArtist,
   checkBoolean,
   checkAlbum,
-  checkTime,
+  checkTime
 } = require("../validations/checkSongs.js");
 
 const playlistController = require("./playlistController.js");
@@ -21,6 +22,7 @@ songs.use("/:song_id/playlists", playlistController);
 // INDEX
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
+  console.log("allSongs:", allSongs)
   if (allSongs[0]) {
     res.status(200).json(allSongs);
   } else {
@@ -78,5 +80,24 @@ songs.put(
     }
   }
 );
+
+songs.put("/:id/favorite", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const song = await getSong(Number(id));
+    if (!song) {
+      return res.status(404).json("Song not found");
+    }
+    const updatedSong = await updateFavoriteStatus(id, !song.is_favorite);
+    if (updatedSong.id) {
+      res.status(200).json(updatedSong);
+    } else {
+      res.status(500).json("Server error: Could not update favorite status.");
+    }
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json("Server error: Could not update favorite status.");
+  }
+});
 
 module.exports = songs;

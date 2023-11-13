@@ -79,13 +79,16 @@ playlistController.post("/", async (req, res) => {
 playlistController.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    console.log("Deleting playlist with ID:", id);
     const deletedPlaylist = await deletePlaylist(id);
     if (deletedPlaylist.id) {
       res.status(200).json(deletedPlaylist);
     } else {
+        console.log("Playlist not found:", id);
       res.status(404).json({ error: "Playlist not found" });
     }
   } catch (error) {
+    console.error("Error deleting playlist:", error);
     res.status(500).json({ error: "Server error" });
   }
 });

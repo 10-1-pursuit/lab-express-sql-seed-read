@@ -38,10 +38,12 @@ const deletePlaylist = async (id) => {
   try {
     const deletedPlaylist = await db.one(
       "DELETE FROM playlists WHERE id = $1 RETURNING *",
-      id
+      [id]
     );
+    console.log("Deleted playlist:", deletedPlaylist); // Add this log
     return deletedPlaylist;
   } catch (error) {
+    console.error("Error deleting playlist:", error);
     return error;
   }
 };
