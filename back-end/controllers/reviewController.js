@@ -8,10 +8,10 @@ const {getSong} = require("../queries/song.js");
 const {
     getAllReviews,
     getReview, 
-    createReview, 
+    newReview, 
     deleteReview, 
     updateReview,
-} = require("../queries/reviews");
+} = require("../queries/reviews.js");
 
 
 //Index
@@ -21,7 +21,7 @@ reviews.get("/", async (req, res) => {
   
     const songs = await getSong(songs_id)
   
-    if (allReviews[0]) {
+    if (songs.id) {
       res.status(200).json({...songs, allReviews});
     } else {
       res.status(500).json({ error: "server error" });
@@ -35,7 +35,7 @@ reviews.get("/:id", async (req, res) => {
     const songs = await getSong(songs_id);
     
     if (review) {
-        res.json ({...songs, review});
+        res.json({...songs, review});
     } else {
         res.status(404).json({error: "not found"});
     }
@@ -45,15 +45,15 @@ reviews.get("/:id", async (req, res) => {
 reviews.put("/:id", async (req,res) => {
     const{id, songs_id} = req.params;
     const updatedReview = await updateReview({songs_id, id, ...req.body});
-    if (updateReview.id){
-        res.status(200).json(updateReview)
+    if (updatedReview.id){
+        res.status(200).json(updatedReview)
     } else {
     res.status(404).json("Review not found");
     }
 });
 
 reviews.post("/", async (req, res) => {
-    const { songs_id, id } = req.params;
+    const { songs_id } = req.params;
     const review = await newReview({songs_id,...req.body});
     res.status(200).json(review);
   });

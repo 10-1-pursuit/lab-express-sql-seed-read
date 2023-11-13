@@ -9,7 +9,7 @@ VALUES
 ('To Be Loved', 'Adele','30', '6:43', false),
 ('Save Your Tears', 'TheWeeknd','After Hours', '3:35', true);
 
-INSERT INTO reviews (songs_id, reviewer, title, content, rating )
+INSERT INTO reviews (songs_id, reviewer, title,content,rating)
 VALUES
 ('1', 'Amy', 'My Favorite', 'Best song for twenty twenty', 3),
 ('2', 'Louis', 'My Favorite', 'This is awesome', 3),

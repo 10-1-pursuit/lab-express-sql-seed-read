@@ -1,15 +1,15 @@
 const express = require("express");
 const songs = express.Router();
 const {getAllSongs, getSong, createSong, deleteSong, updateSong} = require("../queries/song");
-const {checkName, checkBoolean, checkArtist, checkTime ,checkAlbum,validateURL,} = require('../validations/checkSongs')
-const reviewsController = require('./reviewController.js')
-songs.use('./:songs_id/reviews', reviewsController);
+const {checkName, checkBoolean, checkArtist, checkTime ,checkAlbum,} = require('../validations/checkSongs')
+const reviewController = require('./reviewController.js')
+songs.use('./:songs_id/reviews', reviewController);
 
 
 //get all songs
 //localhost:3345/songs/
 songs.get('/', async (req, res) => {
-    const allSongs = await getAllSongs();
+    const allSongs = await getAllSongs()
     if (allSongs[0]) {
         res.status(200).json(allSongs);
       } else {
