@@ -20,7 +20,7 @@ function SongEditForm() {
     const handleEditIsFavoriteCheckboxChange =()=>{
         setSong({ ...song, is_favorite : !song.is_favorite})
     }
-    
+
     const updateSong = ()=>{
         const editedSongData = {
                 name: song.name,

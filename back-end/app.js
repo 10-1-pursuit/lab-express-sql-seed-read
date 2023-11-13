@@ -1,16 +1,19 @@
-const express = require("express")
-const app = express()
-const songsController = require("./controllers/songController.js")
-
 const cors = require("cors")
+const express = require("express")
+const morgan = require("morgan")
+
+const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use("/songs", songsController)
+app.use(morgan("tiny"))
 
 app.get("/", (req, res)=>{
-    res.send("Welcome to Tuner")
+    res.send("Welcome to Tuner App")
 })
+
+const albumsController = require("./controllers/albumsController.js")
+app.use("/albums", albumsController)
 
 app.get("*", (req, res)=>{
     res.status(404).send("Page not found")
