@@ -10,13 +10,18 @@ const checkName = (req, res, next) => {
 }
 //
 const checkBoolean = (req, res, next) => {
-    const fav = req.body.is_favorite
-    if (typeof fav === 'boolean') {
-        next()
-    }else {
-        res.status(400).json({ error: 'is_favorite must be type boolean'})
-     }
-    }
+    const {is_favorite} = req.body;
+    if (
+        is_favorite == "true" ||
+        is_favorite == "false" ||
+        is_favorite == undefined ||
+        typeof is_favorite == "boolean"
+      ) {
+        next();
+      } else {
+        res.status(400).json({ error: "is_favorite must be a boolean value" });
+      }
+    };
 const checkTime = (req, res, next) => {
     if(req.body.time){
         // next() comes from the parameters
@@ -43,6 +48,17 @@ const checkArtist = (req, res, next) => {
             res.status(400).json({ error: 'Album is required'})
         }
     }
+    const validateURL = (req, res, next) => {
+        if (
+          req.body.url.substring(0, 7) === "http://" ||
+          req.body.url.substring(0, 8) === "https://"
+        ) {
+          return next();
+        } else {
+          res
+            .status(400)
+            .json({ error: `You forgot to start your url with http:// or https://` });
+        }
+      };
 
-
-    module.exports = { checkName, checkBoolean, checkArtist, checkTime ,checkAlbum}
+    module.exports = { checkName, checkBoolean, checkArtist, checkTime ,checkAlbum, validateURL};
