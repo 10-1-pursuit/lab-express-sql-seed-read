@@ -1,7 +1,17 @@
 const express = require("express");
 const songs = express.Router();
+// controllers/bookmarkController.js
+const reviewsController = require("./reviewsController.js");
+songs.use("/:songs_id/reviews", reviewsController);
 const { getAllSongs ,getSong,createSong,deleteSong,updateSongs} = require("../queries/song");
 
+//validations
+
+const {
+  checkBoolean,
+  checkName,
+  validateURL,
+} = require("../validations/checkSongs.js");
 
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
@@ -28,7 +38,7 @@ if(oneSong){
 
 })
 
-songs.post("/", async (req,res)=>{
+songs.post("/",checkBoolean,checkName,validateURL, async (req,res)=>{
 
 const song=req.body
 
@@ -58,7 +68,7 @@ songs.delete("/:id", async (req,res)=>{
 
 })
 
-songs.put("/:id", async(req,res)=>{
+songs.put("/:id",checkBoolean,checkName,validateURL, async(req,res)=>{
 
 
 const {id}= req.params

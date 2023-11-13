@@ -1,13 +1,15 @@
 const cors = require("cors");
 const express = require("express");
 const songController= require('./controllers/songController')
-
+const morgan = require("morgan");
 
 const app = express();
 
 // MIDDLEWARE
 app.use(cors());
 app.use(express.json());
+app.use(morgan("tiny"));
+
 
 // ROUTES
 app.get("/", (req, res) => {
