@@ -1,4 +1,4 @@
-import SongNewForm from "../Components/SongEditForm";
+import SongNewForm from "../Components/SongNewForm";
 
 function New() {
   return (

@@ -1,17 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import { Card } from 'react-bootstrap';
+import { Card } from "react-bootstrap";
 
 const API = process.env.REACT_APP_API_URL;
 
 function NewSongForm() {
+  let { id } = useParams();
   const navigate = useNavigate();
   const [newSong, setNewSong] = useState({
     name: "",
     artist: "",
     album: "",
     isFavorite: false,
-    time: ""
+    time: "",
   });
 
   const handleTextChange = (event) => {
@@ -49,7 +50,10 @@ function NewSongForm() {
 
   return (
     <div className="New">
-      <h1 className="text-center" style={{ background: "teal", color: "white", padding: "10px" }}>
+      <h1
+        className="text-center"
+        style={{ background: "teal", color: "white", padding: "10px" }}
+      >
         New Song
       </h1>
       <div className="d-flex justify-content-center align-items-center">
@@ -67,49 +71,53 @@ function NewSongForm() {
                 style={{ marginBottom: "10px" }}
               />
               <br />
-                <label htmlFor="artist">Artist:</label>
-                <input
-                  id="artist"
-                  value={song.artist}
-                  type="text"
-                  onChange={handleTextChange}
-                  placeholder="Artist"
-                  required
-                  style={{ marginBottom: "10px" }}
-                />
-<br />
-                <label htmlFor="album">Album:</label>
-                <input
-                  id="album"
-                  value={song.album}
-                  type="text"
-                  onChange={handleTextChange}
-                  placeholder="Album"
-                  required
-                  style={{ marginBottom: "10px" }}
-                />
-<br />
-                <label htmlFor="time">Time:</label>
-                <input
-                  id="time"
-                  value={song.time}
-                  type="text"
-                  onChange={handleTextChange}
-                  placeholder="Time"
-                  style={{ marginBottom: "10px" }}
-                />
-<br />
-                <label htmlFor="isFavorite">Favorite:</label>
-                <input
-                  id="isFavorite"
-                  type="checkbox"
-                  onChange={handleCheckboxChange}
-                  checked={song.isFavorite}
-                />
-                <br />
-                <br />
+              <label htmlFor="artist">Artist:</label>
+              <input
+                id="artist"
+                value={newSong.artist}
+                type="text"
+                onChange={handleTextChange}
+                placeholder="Artist"
+                required
+                style={{ marginBottom: "10px" }}
+              />
+              <br />
+              <label htmlFor="album">Album:</label>
+              <input
+                id="album"
+                value={newSong.album}
+                type="text"
+                onChange={handleTextChange}
+                placeholder="Album"
+                required
+                style={{ marginBottom: "10px" }}
+              />
+              <br />
+              <label htmlFor="time">Time:</label>
+              <input
+                id="time"
+                value={newSong.time}
+                type="text"
+                onChange={handleTextChange}
+                placeholder="Time"
+                style={{ marginBottom: "10px" }}
+              />
+              <br />
+              <label htmlFor="isFavorite">Favorite:</label>
+              <input
+                id="isFavorite"
+                type="checkbox"
+                onChange={handleCheckboxChange}
+                checked={newSong.isFavorite}
+              />
+              <br />
+              <br />
               <button type="submit">Submit</button>
             </form>
+            <br />
+            <Link to={`/songs/${id}}`}>
+              <button>Nevermind!</button>
+            </Link>
           </Card.Body>
         </Card>
       </div>
