@@ -4,7 +4,7 @@ function NavBar(){
     return(
         <nav>
             <h1>
-                <Link to="/songs">🎧 All Songs 🎧</Link>
+                <Link to="/albums">💿 All Albums 💿</Link>
             </h1>
         </nav>
     )

@@ -1,10 +1,11 @@
-import Songs from "../Components/Songs"
+import Albums from "../Components/Albums"
 
 function Index (){
     return (
         <div>
             <h1>
-                <Songs />
+                Index: 
+                <Albums />
             </h1>
         </div>
     )
