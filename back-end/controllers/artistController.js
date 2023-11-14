@@ -18,9 +18,9 @@ const{
 //Validations
 
 const{
-    checkName,
+    checkName
      
-}=require("../validations/checkTunes.js");
+} = require("../validations/checkTunes.js");
 
 
 artists.get("/", async (req, res)=>{
@@ -45,7 +45,7 @@ artists.get("/:id", async (req, res) =>{
 artists.post("/", checkName, async (req,res)=>{
     try {
         const artist = await createArist(req.body);
-        res.json(artist)
+        res.json(artist);
     } catch (error) {
         res.status(400).json({error:error})
     }

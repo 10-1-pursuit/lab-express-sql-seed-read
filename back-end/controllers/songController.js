@@ -1,6 +1,6 @@
 const express = require("express");
 
-const songs = express.Router({mergeParams:true});
+const songs = express.Router({mergeParams: true});
 
 const {getArtist} = require("../queries/artists.js");
 
@@ -27,7 +27,6 @@ const {artist_id} = req.params;
   const artist =  await getArtist(artist_id)
   if(allTunes[0]){
 res.status(200).json({...artist, allTunes});
-
   }else{
     res.status(500).json({error: "server error"})
   }
@@ -40,7 +39,7 @@ songs.get("/:id", async (req, res) => {
   const artist =  await getArtist(artist_id)
 
 if(tune){
-  res.json({...artist, tune})
+  res.json({...artist, tune});
 }else{
   res.status(404).json({error: "not found"})
 }
@@ -56,7 +55,7 @@ songs.post("/", checkName, checkArtist, checkBoolean, async (req, res) => {
 //update
 songs.put("/:id", checkName, checkArtist, checkBoolean, async (req, res) => {
   const {  artist_id,id } = req.params;
-  const body = req.body;
+  const {body} = req.body;
   const updatedSong = await updateTune({artist_id,id, ...body});
   if (updatedSong.id) {
     res.status(200).json(updatedSong);

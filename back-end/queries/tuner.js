@@ -14,7 +14,7 @@ const getAllTunes = async (artist_id) => {
 
 const getTune = async (id) => {
   try {
-    const oneSong = await db.one("SELECT * FROM tuners WHERE ID=$1", id);
+    const oneSong = await db.one("SELECT * FROM tuners WHERE id=$1", id);
     return oneSong;
   } catch (error) {
     return error;

@@ -13,7 +13,7 @@ app.get('/', (req,res)=>{
     res.send('Welcome to The Tuner App')
 });
 
-const artistController = require('./controllers/artistController')
+const artistController = require('./controllers/artistController.js')
 app.use('/artists', artistController)
 
 app.get('*', (req,res)=>{

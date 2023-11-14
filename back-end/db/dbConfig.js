@@ -11,7 +11,7 @@ const cn = {
 
 //Connect to tuners_dev db
 
-const db = pgp(cn)
+const db = pgp(cn);
 
 
-module.exports = db
+module.exports = db;

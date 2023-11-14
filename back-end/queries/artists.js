@@ -24,7 +24,7 @@ const createArist = async (artist) => {
             "INSERT INTO artists (name, category, hometown) VALUES ($1,$2,$3) RETURNING *",
             [artist.name, artist.category,artist.hometown]
         );
-        return newArtist
+        return newArtist;
     } catch (error) {
         return error
     }
@@ -48,7 +48,7 @@ const updateArtist = async (id, artist) => {
             "UPDATE artists SET name=$1, category=$2, hometown=$3 WHERE id=$4 RETURNING *",
             [artist.name, artist.category,artist.hometown, id]
         );
-        return updatedArtist
+        return updatedArtist;
     } catch (error) {
         return error
     }
