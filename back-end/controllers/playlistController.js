@@ -18,7 +18,9 @@ const {
 playlistController.get("/", async (req, res) => {
   try {
     const { song_id } = req.params;
+    console.log("Received request for song ID:", song_id);
     const playlist = await getAllPlaylists(song_id);
+    console.log("Fetched playlists:", playlist);
     const song = await getSong(song_id);
     if (song.id) {
       res.status(200).json({ ...song, playlist });
@@ -35,7 +37,10 @@ playlistController.get("/", async (req, res) => {
 playlistController.get("/:id", async (req, res) => {
   try {
     const { song_id, id } = req.params;
+    console.log("Received request for song ID:", song_id);
+    console.log("Received request for playlist ID:", id);
     const playlist = await getPlaylist(id);
+    console.log("Fetched playlist:", playlist);
     const song = await getSong(song_id);
     if (playlist) {
       res.status(200).json({ ...song, playlist });
@@ -51,6 +56,8 @@ playlistController.get("/:id", async (req, res) => {
 playlistController.put("/:id", async (req, res) => {
   try {
     const { song_id, id } = req.params;
+    console.log("Received request for song ID:", song_id);
+    console.log("Received request for playlist ID:", id);
     const updatedPlaylist = await updatePlaylist({ song_id, id, ...req.body });
     if (updatedPlaylist.id) {
       res.status(200).json(updatedPlaylist);
@@ -66,6 +73,7 @@ playlistController.put("/:id", async (req, res) => {
 playlistController.post("/", async (req, res) => {
   try {
     const { song_id } = req.params;
+    console.log("Received request for song ID:", song_id);
     const playlistData = req.body;
     const playlist = await createPlaylist({ song_id, ...playlistData });
     res.status(200).json(playlist);
@@ -79,6 +87,7 @@ playlistController.post("/", async (req, res) => {
 playlistController.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    console.log("Received request to delete playlist with ID:", id);
     console.log("Deleting playlist with ID:", id);
     const deletedPlaylist = await deletePlaylist(id);
     if (deletedPlaylist.id) {

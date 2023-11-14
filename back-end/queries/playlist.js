@@ -35,18 +35,21 @@ const createPlaylist = async (playlist) => {
 };
 
 const deletePlaylist = async (id) => {
-  try {
-    const deletedPlaylist = await db.one(
-      "DELETE FROM playlists WHERE id = $1 RETURNING *",
-      [id]
-    );
-    console.log("Deleted playlist:", deletedPlaylist); // Add this log
-    return deletedPlaylist;
-  } catch (error) {
-    console.error("Error deleting playlist:", error);
-    return error;
-  }
-};
+    try {
+      // Find songs associated with the playlist
+      const songsToDelete = await db.query('SELECT * FROM songs WHERE playlist_id = $1', [id]);
+      // Update the playlist_id to NULL for associated songs
+      await Promise.all(songsToDelete.map(song => db.query('UPDATE songs SET playlist_id = NULL WHERE id = $1', [song.id])));
+      // Delete the playlist
+      await db.query('DELETE FROM playlists WHERE id = $1', [id]);
+  
+      console.log('Playlist and associated songs deleted successfully');
+      return { id };
+    } catch (error) {
+      console.error('Error deleting playlist and associated songs', error);
+      throw error;
+    }
+  };
 
 const updatePlaylist = async (playlist) => {
   try {
