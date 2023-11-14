@@ -1,11 +1,11 @@
 const db = require("../db/dbConfig.js");
 
 
-const getAllSongs = async () => {
+const getAllSongs = async (artist_id) => {
   // async function it is not going to stop when waiting for  asychrochous
   // calls, dont want the whole app to stop when taking that call-rest of app can keep running
     try {
-        const allSongs = await db.any("SELECT * FROM songs");
+        const allSongs = await db.any("SELECT * FROM songs WHERE artist_id=$1", artist_id);
         return allSongs;
      } catch(error) {
        return error;
@@ -27,8 +27,8 @@ const getOneSong = async (id) => {
 
 const newSong = async (song) => {
     try {
-       const createSong = await db.one("INSERT INTO songs (name, artist, album, time, is_favorite) VALUES ($1, $2, $3, $4, $5) RETURNING *", 
-       [song.name, song.artist, song.album, song.time, song.is_favorite]
+       const createSong = await db.one("INSERT INTO songs (name, album, time, is_favorite, artist_id) VALUES ($1, $2, $3, $4, $5) RETURNING *", 
+       [song.name, song.album, song.time, song.is_favorite, song.artist_id]
        )
         return createSong
     } catch (error) {
@@ -48,17 +48,17 @@ const deleteSong = async (id) => {
 }
 
 
-const updateSong = async (id, song) => {
+const updateSong = async (song) => {
     try {
       const updatedSong = await db.one(
-        "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE id=$6 RETURNING *",
-        [song.name, song.artist, song.album, song.time, song.is_favorite, id]
+        "UPDATE songs SET name=$1, album=$2, time=$3, is_favorite=$4 WHERE id=$5 RETURNING *",
+        [song.name, song.album, song.time, song.is_favorite, song.id]
       );
       return updatedSong;
     } catch (error) {
       return error;
     }
-  };
+  }
 
 
 module.exports = { getAllSongs, getOneSong, newSong, deleteSong, updateSong};
