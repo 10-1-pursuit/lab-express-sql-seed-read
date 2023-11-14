@@ -1,7 +1,9 @@
+import Nav from "./components/Nav";
+
 function App() {
   return (
     <div className="">
-      <h1>Tuner App</h1>
+      <Nav />
     </div>
   );
 }
