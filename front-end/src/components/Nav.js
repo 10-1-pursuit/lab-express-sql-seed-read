@@ -1,20 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
         <h1 className="navbar-brand">
-          <Link to="/songs" className="text-white text-decoration-none">
+          <Link to="/" className="nav-link">
             Songs
           </Link>
         </h1>
-        <button className="btn btn-primary">
-          <Link to="/songs/new" className="text-white text-decoration-none">
+        <div className="navbar-nav ms-auto">
+          <Link to="/new" className="btn btn-primary nav-link">
             Add Song
           </Link>
-        </button>
+        </div>
       </div>
     </nav>
   );
