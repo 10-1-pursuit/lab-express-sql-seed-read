@@ -12,6 +12,7 @@ function SongDetails() {
   let { id } = useParams();
 
   console.log("Value of id:", id);
+  console.log("playlists state:", setPlaylists)
 
   const toggleFavorite = async (id, isFavorite) => {
     try {

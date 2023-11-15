@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Playlist from "./Playlist";
 import PlaylistForm from "./PlaylistForm";
+import "./playlistStyles.css";
 
 const API = process.env.REACT_APP_API_URL;
 
 function Playlists({ playlists, setPlaylists }) {
   const [loading, setLoading] = useState(true);
-  let { id } = useParams();
   const navigate = useNavigate();
+  let { id } = useParams();
 
   const handleAdd = (createPlaylists) => {
     fetch(`${API}/songs/${id}/playlists`, {
@@ -37,18 +38,21 @@ function Playlists({ playlists, setPlaylists }) {
       const response = await fetch(`${API}/songs/${id}/playlists/${id}`, {
         method: "DELETE",
       });
-
+  
       if (response.ok) {
         const deletedPlaylist = await response.json();
-
+  
         if (deletedPlaylist && deletedPlaylist.id) {
           console.log("Playlist deleted successfully");
-
+  
           setPlaylists((prevPlaylists) =>
-            prevPlaylists.filter(
-              (playlist) => playlist.id !== deletedPlaylist.id
-            )
+            prevPlaylists.filter((playlist) => playlist.id !== deletedPlaylist.id)
           );
+  
+          // setTimeout to let code block finish before navigation happens
+          setTimeout(() => {
+            navigate(`/songs/${id}`);
+          }, 0);
         } else {
           console.log("Playlist not found:", id);
         }
@@ -57,8 +61,6 @@ function Playlists({ playlists, setPlaylists }) {
       }
     } catch (error) {
       console.error("Error deleting playlist:", error);
-    } finally {
-      navigate("/songs");
     }
   };
 
@@ -117,7 +119,6 @@ function Playlists({ playlists, setPlaylists }) {
 
   return (
     <section className="Playlists">
-      <h2>Playlists</h2>
       <PlaylistForm handleSubmit={handleAdd}>
         <h3>Add a New Playlist</h3>
       </PlaylistForm>

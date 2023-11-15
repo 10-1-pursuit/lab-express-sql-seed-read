@@ -1,11 +1,10 @@
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { Card } from "react-bootstrap";
 
 const API = process.env.REACT_APP_API_URL;
 
 function NewSongForm() {
-  let { id } = useParams();
   const navigate = useNavigate();
   const [newSong, setNewSong] = useState({
     name: "",
@@ -115,7 +114,7 @@ function NewSongForm() {
               <button type="submit">Submit</button>
             </form>
             <br />
-            <Link to={`/songs/${id}}`}>
+            <Link to={`/songs`}>
               <button>Nevermind!</button>
             </Link>
           </Card.Body>

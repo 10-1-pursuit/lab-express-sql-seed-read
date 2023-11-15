@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "./playlistStyles.css";
 
 function PlaylistForm({ playlistDetails, handleSubmit, toggleView, children }) {
   let { id } = useParams();
@@ -39,7 +40,7 @@ function PlaylistForm({ playlistDetails, handleSubmit, toggleView, children }) {
   };
 
   return (
-    <div className="Edit">
+    <div className="EditForm">
       {children}
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name:</label>
@@ -58,9 +59,12 @@ function PlaylistForm({ playlistDetails, handleSubmit, toggleView, children }) {
           required
           value={playlist.description}
           onChange={handleTextChange}
+          placeholder="Playlist description"
         />
         <br />
-        <input type="submit" />
+        <button className="btn btn-success" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

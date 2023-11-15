@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PlaylistForm from "./PlaylistForm";
+import "./playlistStyles.css";
 
 function Playlist({ playlist, handleDelete, handleSubmit }) {
   const [viewEditForm, setEditForm] = useState(false);
@@ -22,10 +23,15 @@ function Playlist({ playlist, handleDelete, handleSubmit }) {
         </div>
       )}
       <div className="playlist-actions">
-        <button onClick={toggleView}>
+        <button className="btn btn-primary" onClick={toggleView}>
           {viewEditForm ? "Cancel" : "Edit this playlist"}
         </button>
-        <button onClick={() => handleDelete(playlist.id)}>delete</button>
+        <button
+          className="btn btn-danger me-2"
+          onClick={() => handleDelete(playlist.id)}
+        >
+          delete
+        </button>
       </div>
     </div>
   );
