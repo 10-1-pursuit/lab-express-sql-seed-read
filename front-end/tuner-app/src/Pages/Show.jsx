@@ -1,5 +1,4 @@
 import AlbumDetails from "../Components/AlbumDetails"
-import SongDetail from "../Components/SongDetails"
 
 function Show (){
     return (

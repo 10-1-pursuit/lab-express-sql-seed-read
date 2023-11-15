@@ -21,6 +21,7 @@ useEffect(()=>{
     return (
         <div>
             {albums.map((album)=>{
+                // console.log(album)  
                 return <Album key={album.id} album={album}/>
             })}
         </div>

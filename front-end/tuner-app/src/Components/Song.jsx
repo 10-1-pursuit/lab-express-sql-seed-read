@@ -1,20 +1,21 @@
-import {useState} from "react"
-import SongNewForm from "./SongNewForm"
+import {useState} from "react";
+import SongForm from "./SongForm";
 
 function Song({song, handleSongDelete, handleSongEditSubmit}){
     const[viewSongEditForm, setViewSongEditForm] = useState(false)
     const toggleEditFormView = ()=>{
         setViewSongEditForm(!viewSongEditForm)
+        console.log(song)
     };
     return (
         <div>
             <div>
                 {viewSongEditForm ? (
-                    <SongNewForm
+                <SongForm
                     songDetails={song}
                     toggleEditFormView={toggleEditFormView}
                     handleSongEditSubmit={handleSongEditSubmit}/>
-                ): (
+                ) : (
                     <div>
                         <h5>
                             Song Title: {song.title}
