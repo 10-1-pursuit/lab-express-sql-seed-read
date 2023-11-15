@@ -10,14 +10,14 @@ const {
   createTune,
   deleteTune,
   updateTune,
-} = require("../queries/tuner");
+} = require("../queries/tuner.js");
 
 
 const {
   checkName,
   checkArtist,
   checkBoolean,
-} = require("../validations/checkTunes");
+} = require("../validations/checkTunes.js");
 
 //get all tunes/ Index
 
@@ -25,7 +25,7 @@ songs.get("/", async (req, res) => {
 const {artist_id} = req.params;
   const allTunes = await getAllTunes(artist_id);
   const artist =  await getArtist(artist_id)
-  if(allTunes[0]){
+  if(artist.id ){
 res.status(200).json({...artist, allTunes});
   }else{
     res.status(500).json({error: "server error"})
@@ -54,11 +54,11 @@ songs.post("/", checkName, checkArtist, checkBoolean, async (req, res) => {
 
 //update
 songs.put("/:id", checkName, checkArtist, checkBoolean, async (req, res) => {
-  const {  artist_id,id } = req.params;
-  const {body} = req.body;
-  const updatedSong = await updateTune({artist_id,id, ...body});
+  const { artist_id, id } = req.params;
+  const body = req.body;
+  const updatedSong = await updateTune({artist_id, id, ...body});
   if (updatedSong.id) {
-    res.status(200).json(updatedSong);
+    res.status(200).json(updatedSong); 
   } else {
     res.status(404).json({ error: "Tune Not Found" });
   }
