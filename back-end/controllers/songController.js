@@ -50,11 +50,10 @@ songs.get("/", async (req, res) => {
 });
 
 songs.get("/:id", async (req, res) => {
-    const { artist_id, id } = req.params;
+    const { id } = req.params;
     const oneSong = await getSong(id);
-    const artist = await getArtist(artist_id);
     if (oneSong) {
-        res.json({...artist, oneSong});
+        res.json({oneSong});
     } else {
         res.status(404).json({ error: "Not found" });
     }
@@ -77,8 +76,8 @@ songs.delete("/:id", async (req, res) => {
 });
 
 songs.put("/:id", checkName, checkArtist, checkBoolean, async (req, res) => {
-    const { artist_id, id } = req.params;
-    const updatedSong = await updateSong({artist_id, id, ...req.body});
+    const { id } = req.params;
+    const updatedSong = await updateSong( id, req.body);
     if (updatedSong.id) {
         res.status(200).json(updatedSong);
     } else {
