@@ -8,6 +8,8 @@ import Show from './pages/Show.jsx'
 import Edit from './pages/Edit.jsx'
 import FourOFour from './pages/FourOFour.jsx'
 import './App.css'
+import Artists from './components/Artists.jsx'
+import ArtistsSongs from './components/ArtistsSongs.jsx'
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/songs' element={<Index />}/>
+            <Route path='/artists' element={<Artists />}/>
+            <Route path='/artists/:id/songs' element={<ArtistsSongs />} />
             <Route path='/songs/new' element={<New />}/>
             <Route path='/songs/:id' element={<Show />}/>
             <Route path='/songs/:id/edit' element={<Edit />}/>

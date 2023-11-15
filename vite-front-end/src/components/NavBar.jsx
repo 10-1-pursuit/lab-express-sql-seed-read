@@ -6,6 +6,9 @@ export default function NavBar() {
       <h1>
         <Link to="/songs">Songs</Link>
       </h1>
+      <h1>
+        <Link to="/artists">Artists</Link>
+      </h1>
       <button>
         <Link to="/songs/new">New Song</Link>
       </button>

@@ -21,7 +21,7 @@ export default function SongEditForm() {
                 const response = await fetch(`${API}/songs/${id}`);
                 if (response.ok) {
                     const songDetails = await response.json();
-                    setSong(songDetails);
+                    setSong(songDetails.oneSong);
                 } else {
                     console.error("Song not found");
                 }
@@ -32,6 +32,7 @@ export default function SongEditForm() {
 
         fetchSongDetails();
     }, [id]);
+    console.log(song)
 
     const handleText = e => setSong({ ...song, [e.target.id]: e.target.value });
     const handleCheckbox = () => setSong({ ...song, is_favorite: !song.is_favorite });
