@@ -14,6 +14,11 @@ function NewSongForm() {
     is_favorite: false
   });
 
+  // get current year to be used with the max value of the form input for "year".
+  const getCurrentYear = () => {
+    return new Date().getFullYear();
+  };
+
   // Add New Song
   const addSong = () => {
     fetch(`${API}/songs`, {
@@ -39,19 +44,19 @@ function NewSongForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     addSong();
-    resetForm();
+    // resetForm();
   };
 
-  function resetForm() {
-    setSong({
-      name: "",
-      artist: "",
-      album: "",
-      year: "",
-      genre: "",
-      is_favorite: false
-    });
-  }
+  // function resetForm() {
+  //   setSong({
+  //     name: "",
+  //     artist: "",
+  //     album: "",
+  //     year: "",
+  //     genre: "",
+  //     is_favorite: false
+  //   });
+  // }
 
   return (
     <div className="add-song">
@@ -87,6 +92,9 @@ function NewSongForm() {
           id="year"
           value={song.year}
           type="number"
+          min="1950"
+          step="1"
+          max={getCurrentYear()}
           onChange={handleTextChange}
           placeholder="...year"
         />

@@ -24,7 +24,6 @@ function Songs() {
 
   return (
     <div className="container-games">
-      <h1>Songs Database:</h1>
       <table>
         <thead>
           <tr>
@@ -42,7 +41,6 @@ function Songs() {
               <td>
                 <Link to={`/songs/${item.id}`}>{item.name}</Link>
               </td>
-              <td>{item.name}</td>
               <td>{item.artist}</td>
               <td>{item.album}</td>
               <td>{item.year}</td>
