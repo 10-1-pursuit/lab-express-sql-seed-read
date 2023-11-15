@@ -1,0 +1,47 @@
+.Playlist {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.Playlist h4 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  box-shadow: 0 0 10px rgba(42, 3, 3, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.Playlist span {
+  display: block;
+  margin-top: 5px;
+  font-size: 1rem;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
+
+.playlist-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.EditForm {
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.EditForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.EditForm input {
+  width: 50%;
+  margin-bottom: 15px;
+}
+
+.Playlists {
+  margin: 50px;
+}

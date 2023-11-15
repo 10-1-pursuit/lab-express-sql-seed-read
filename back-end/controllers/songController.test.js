@@ -123,13 +123,15 @@ describe("Songs", () => {
           const response = await request(songs).post("/songs").send({
             name: "Star Roving",
             artist: "Slowdive",
-            is_favorite: "false",
+            album: "Slowdive",
+            is_favorite: false,
             time: "5:37",
           });
 
           const parsedRes = JSON.parse(response.text);
           expect(response.statusCode).toBe(200);
           expect(!!parsedRes.id).toBe(true);
+          expect(parsedRes.album).toEqual("Slowdive");
           expect(parsedRes.artist).toEqual("Slowdive");
           expect(parsedRes.name).toEqual("Star Roving");
           expect(parsedRes.is_favorite).toEqual(false);
