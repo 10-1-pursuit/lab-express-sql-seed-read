@@ -35,7 +35,7 @@ const createSong = async (song) => {
 };
 
 const updateSong = async (id) => {
-  try {const updatedSong = await db.one ("UPDATE colors SET name=$1, artist=$2, is_favorite=$3, image_url=$4 WHERE id=$5 RETURNING *", [song.name, song.artist, song.is_favorite, song.image_url, id])
+  try {const updatedSong = await db.one ("UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5, video_url=$6, image_url=$7, WHERE id=$8 RETURNING *", [song.name, song.artist, song.album, song.time, song.is_favorite, song.video_url, song.image_url, id])
   return updatedSong
   } catch (err) {
     return err
