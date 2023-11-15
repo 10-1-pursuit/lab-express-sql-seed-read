@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const API = import.meta.env.VITE_BASE_URL;
-
 console.log(API);
 
 function Songs() {
@@ -38,7 +37,7 @@ function Songs() {
           </tr>
         </thead>
         <tbody>
-          {songs.map((item) => {
+          {songs.map((item) => (
             <tr key={item.id} className="songlist">
               <td>
                 <Link to={`/songs/${item.id}`}>{item.name}</Link>
@@ -49,8 +48,8 @@ function Songs() {
               <td>{item.year}</td>
               <td>{item.genre}</td>
               <td>{item.is_favorite}</td>
-            </tr>;
-          })}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
