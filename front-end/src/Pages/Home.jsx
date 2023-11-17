@@ -11,11 +11,10 @@ function Home() {
         <div className="">
           <h1 className="text-center mb-4">Welcome to Tuner</h1>
           <h4 className="text-center">
-            Get organized and boost your productivity! Start managing your tasks
-            
+            Organized your songs playlist with Tuner
           </h4>
           <div className="text-center mt-4">
-            <Link to="/tasks" className="btn btn-primary">
+            <Link to="/songs" className="btn btn-primary">
               Get Started
             </Link>
           </div>
