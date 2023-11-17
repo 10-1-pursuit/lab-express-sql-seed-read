@@ -30,12 +30,18 @@ const checkTime = (req, res, next) => {
     }
 }
 
+
 const checkBoolean = (req, res, next) => {
-    const fav = req.body.is_favorite
-    if(fav === 'boolean'){
-        next()
+    const { is_favorite } = req.body;
+    if (
+      is_favorite == "true" ||
+      is_favorite == "false" ||
+      is_favorite == undefined ||
+      typeof is_favorite == "boolean"
+    ) {
+      next();
     } else {
-        res.status(400).json({ error: 'Boolean is required'})
+      res.status(400).json({ error: "is_favorite must be a boolean value" });
     }
 }
 
@@ -44,3 +50,4 @@ module.exports = { checkName,
                    checkAlbum,
                    checkTime,
                    checkBoolean }
+                    
