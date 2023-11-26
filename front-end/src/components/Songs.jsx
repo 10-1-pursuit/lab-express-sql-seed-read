@@ -8,6 +8,8 @@ const Songs = () => {
   const [sort, setSort] = useState("asc");
 
   useEffect(() => {
+    console.log(`${API}/songs`)
+
     fetch(`${API}/songs`)
       .then((r) => {
         if (!r.ok) {
@@ -15,7 +17,9 @@ const Songs = () => {
         }
         return r.json();
       })
+
       .then((r) => setSongs(r))
+
       .catch((err) => console.log("Error:", err));
   }, []);
 
@@ -33,16 +37,14 @@ const Songs = () => {
     <>
       <div>
         <label> Sort Order</label>
-        <button onClick={() => handleSort("asc")}> Ascending</button>
-        <button onClick={() => handleSort("desc")}>Descending</button>
+        <button onClick={() => handleSort("asc")}> ⬆</button>
+        <button onClick={() => handleSort("desc")}>⬇</button>
       </div>
       <div className="container">
         {songs.map((song, id) => (
           <div className="all-songs container" key={song.id}>
-        
-             Song: <Link to={`/songs/${song.id}`}> {song.name}</Link>{" "}
-              
-            {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+            <img src={song.image_url} alt="Album" />
+            <Link to={`/songs/${song.id}`}> {song.name}</Link> &nbsp;&nbsp;&nbsp;&nbsp;
             <span style={{ color: song.is_favorite ? "red" : "black" }}>
               {song.is_favorite ? "Favorite" : ""}
             </span>

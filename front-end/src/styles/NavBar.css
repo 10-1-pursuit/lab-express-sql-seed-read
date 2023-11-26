@@ -1,6 +1,9 @@
 .navbar {
     display: flex;
-    /* justify-content: space-around; */
+    justify-content: space-around;
     padding: 10px;
 }
 
+.element2 {
+    border-radius: 1rem;
+}

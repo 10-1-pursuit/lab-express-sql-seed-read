@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import SongEditForm from "./SongEditForm";
+import VideoPlayer from "./VideoPlayer";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -8,7 +10,7 @@ const Song = () => {
   console.log(id);
 
   const [song, setSong] = useState([]);
-const userErr = ''
+  // const userErr = ''
   useEffect(() => {
     fetch(`${API}/songs/${id}`)
       .then((res) => {
@@ -22,16 +24,30 @@ const userErr = ''
   }, [id]);
 
   return (
-    <div>
-      <p>Song: {song.name}</p>
-      <p>
-        {" "}
-        Artist: &nbsp;
-        {song.artist}
-      </p>
-      <p> Album: {song.album}</p>
-      Duration: &nbsp; {song.time}
-    </div>
+    <>
+      <div>
+        <img src={song.image_url} alt="Album" />
+        <p>Song: {song.name}</p>
+        <p>
+          {" "}
+          Artist: &nbsp;
+          {song.artist}
+        </p>
+        <p> Album: {song.album} </p>
+        Duration: &nbsp; {song.time}
+        <div>
+          <button style={{borderRadius:".7em"}}>
+            <Link to={`song.video_url`}> Video Link</Link>
+          </button>
+        </div>
+      </div>
+      <div>
+        {/* <SongEditForm /> */}
+        <button style={{padding:"12px", borderRadius:".7em"}}>
+          <Link to={`/songs/${id}/edit`}> Edit </Link>
+        </button>
+      </div>
+    </>
   );
 };
 

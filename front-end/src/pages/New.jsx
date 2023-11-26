@@ -2,14 +2,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const New = () => {
+
   const API = process.env.REACT_APP_API_URL;
-const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const [song, setSong] = useState({
     name: "",
     artist: "",
     album: "",
     time: "0:00",
     is_favorite: false,
+    image_url: "",
   });
 
   const addSong = () => {
@@ -19,6 +22,7 @@ const navigate = useNavigate()
       album: song.album,
       time: song.time,
       is_favorite: song.is_favorite,
+      image_url: song.image_url,
     };
 
     try {
@@ -50,9 +54,15 @@ const navigate = useNavigate()
     addSong();
   };
 
+
+
   return (
     <div className="new-form">
-      <form onSubmit={handleSubmit}><br/><br/><br/>
+      <form onSubmit={handleSubmit}>
+        <br />
+        <br />
+        <br />
+
         <label htmlFor="name">Name:</label>
         <input
           id="name"
@@ -93,21 +103,28 @@ const navigate = useNavigate()
           required
         />
 
-<label htmlFor="is_favorite">Favorite:</label>
+        <label htmlFor="is_favorite">Favorite:</label>
         <input
           id="is_favorite"
           type="checkbox"
           onChange={handleCheckboxChange}
           checked={song.is_favorite}
+          required
         />
+
+        <label htmlFor="image_url">Image:</label>
+        <input
+          id="image_url"
+          type="url"
+          onChange={handleCheckboxChange}
+          checked={song.image_url}
+        />
+
         <button type="submit">Add Song</button>
-
       </form>{" "}
-
       <Link to={`/song`}>
-        <button>Nah!</button>
+        <button>No thank you!</button>
       </Link>
-
     </div>
   );
 };
